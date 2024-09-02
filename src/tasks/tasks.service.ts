@@ -15,6 +15,13 @@ export class TasksService {
   async getTasks(userId: number) {
     const tasks = await this.taskRepository.findAll({
       where: { userId: userId },
+      include: { all: true },
+    });
+    return tasks;
+  }
+  async getAllTasks() {
+    const tasks = await this.taskRepository.findAll({
+      include: { all: true },
     });
     return tasks;
   }

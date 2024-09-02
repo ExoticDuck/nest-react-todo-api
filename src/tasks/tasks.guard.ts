@@ -36,6 +36,9 @@ export class TasksGuard implements CanActivate {
       }
 
       const user: User = this.jwtService.verify(token);
+      if (user.roles[0].value === 'ROLE_ADMIN') {
+        return true;
+      }
       req.user = user;
       return user.id == userId;
     } catch (error) {
